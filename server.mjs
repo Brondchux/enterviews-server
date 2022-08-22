@@ -1,4 +1,4 @@
-// import "dotenv/config";
+import "dotenv/config";
 import express from "express";
 import routes from "./controllers";
 import sequelize from "./config/connection";
@@ -6,14 +6,21 @@ import sequelize from "./config/connection";
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// console.log(routes);
+// URL-encoded & JSON bodies setup
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes setup
 app.use(routes);
 
 // Sequelize setup
-// sequelize.sync({ force: false }).then(() => {
+try {
+	await sequelize.authenticate();
+	console.log("Connection has been established successfully.");
+} catch (err) {
+	console.error("Unable to connect to the database:", err);
+}
+
 app.listen(PORT, () => {
-	console.log(`Listening on http://localhost:${PORT}`);
+	console.log(`Listening on port ${PORT}`);
 });
-// });
