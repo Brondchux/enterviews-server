@@ -1,4 +1,5 @@
-import { Router as router } from "express";
+import express from "express";
+const router = express.Router();
 
 // GET /api/user/:id
 router.get("/:id", (req, res) => {});
@@ -9,4 +10,4 @@ router.post("/signin", (req, res) => {});
 // POST /api/user/signup
 router.post("/signup", (req, res) => {});
 
-module.exports = router;
+export default router;
