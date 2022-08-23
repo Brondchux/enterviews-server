@@ -30,16 +30,28 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-// PUT /api/interviews/:id/:userId
-router.put("/:id/:userId", async (req, res) => {
-	const id = xss(req.params.id);
+// PUT /api/interviews/:userId/:id
+router.put("/:userId/:id", async (req, res) => {
 	const userId = xss(req.params.userId);
+	const id = xss(req.params.id);
 	try {
-		const updated = await Interview.update(
+		const interview = await Interview.update(
 			{ active: false },
-			{ where: { id, user_id: userId } }
+			{ where: { id, user_id: userId }, returning: true, plain: true }
 		);
-		res.json({ status: 200, error: false, data: updated });
+		res.json({ status: 200, error: false, data: interview });
+	} catch (err) {
+		res.json({ status: 400, error: err, data: null });
+	}
+});
+
+// DELETE /api/interviews/:userId/:id
+router.delete("/:userId/:id", async (req, res) => {
+	const userId = xss(req.params.userId);
+	const id = xss(req.params.id);
+	try {
+		await Interview.destroy({ where: { id, user_id: userId } });
+		res.json({ status: 200, error: false, data: { destroyed: true } });
 	} catch (err) {
 		res.json({ status: 400, error: err, data: null });
 	}

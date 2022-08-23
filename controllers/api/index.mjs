@@ -5,7 +5,7 @@ import interviewRoutes from "./interview-routes";
 const router = express.Router();
 
 router.use("/user", userRoutes);
-router.use("/round", roundRoutes);
+router.use("/rounds", roundRoutes);
 router.use("/interviews", interviewRoutes);
 
 export default router;
