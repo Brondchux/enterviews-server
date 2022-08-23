@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import routes from "./controllers";
-import sequelize from "./config/connection";
+import db from "./config/connection";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,12 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
 // Sequelize setup
-try {
-	await sequelize.authenticate();
-	console.log("Connection has been established successfully.");
-} catch (err) {
-	console.error("Unable to connect to the database:", err);
-}
+db.sync({ force: true })
+	.then(() => console.log("DB connection has been established successfully."))
+	.catch((err) => console.error("Unable to connect to the database:", err));
+
+// db.authenticate()
+// 	.then(() => {})
+// 	.catch((e) => {});
 
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}`);
