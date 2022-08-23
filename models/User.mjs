@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import db from "../config/connection";
+import sequelize from "../config/connection";
 
 class User extends Model {}
 
@@ -19,11 +19,11 @@ User.init(
 		},
 	},
 	{
-		db,
-		modelName: "User",
+		sequelize,
+		modelName: "user",
 		timestamps: true,
-		freezeTableName: true,
 		underscored: true,
+		freezeTableName: true,
 	}
 );
 

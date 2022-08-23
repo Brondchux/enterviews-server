@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import db from "../config/connection";
+import sequelize from "../config/connection";
 
 class Interview extends Model {}
 
@@ -19,6 +19,7 @@ Interview.init(
 			defaultValue: true,
 		},
 		user_id: {
+			type: DataTypes.INTEGER,
 			references: {
 				model: "user",
 				key: "id",
@@ -26,11 +27,11 @@ Interview.init(
 		},
 	},
 	{
-		db,
-		modelName: "Interview",
+		sequelize,
+		modelName: "interview",
 		timestamps: true,
-		freezeTableName: true,
 		underscored: true,
+		freezeTableName: true,
 	}
 );
 

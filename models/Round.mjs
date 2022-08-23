@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import db from "../config/connection";
+import sequelize from "../config/connection";
 
 class Round extends Model {}
 
@@ -10,11 +10,11 @@ Round.init(
 			allowNull: false,
 		},
 		start_time: {
-			type: DataTypes.NOW,
+			type: DataTypes.DATE,
 			allowNull: false,
 		},
 		end_time: {
-			type: DataTypes.NOW,
+			type: DataTypes.DATE,
 			allowNull: false,
 		},
 		duration: {
@@ -26,13 +26,8 @@ Round.init(
 			allowNull: false,
 			defaultValue: false,
 		},
-		user_id: {
-			references: {
-				model: "user",
-				key: "id",
-			},
-		},
 		interview_id: {
+			type: DataTypes.INTEGER,
 			references: {
 				model: "interview",
 				key: "id",
@@ -40,11 +35,11 @@ Round.init(
 		},
 	},
 	{
-		db,
-		modelName: "Round",
+		sequelize,
+		modelName: "round",
 		timestamps: true,
-		freezeTableName: true,
 		underscored: true,
+		freezeTableName: true,
 	}
 );
 
