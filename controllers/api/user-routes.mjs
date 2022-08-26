@@ -6,10 +6,9 @@ import { User } from "../../models";
 // GET /api/user/:id
 router.get("/:id", async (req, res) => {
 	const id = xss(req.params.id);
-	console.log("jey");
 	try {
 		const user = await User.findByPk(id);
-		// res.json({ status: 200, error: false, data: user });
+		res.json({ status: 200, error: false, data: user });
 	} catch (err) {
 		res.json({ status: 400, error: err, data: null });
 	}
