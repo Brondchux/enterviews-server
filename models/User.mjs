@@ -31,6 +31,11 @@ User.init(
 				user.password = await bcrypt.hash(user.password, 10);
 				return user;
 			},
+			beforeBulkCreate: (users) => {
+				users.forEach((user) => {
+					user.dataValues.password = bcrypt.hashSync(user.password, 10);
+				});
+			},
 		},
 		sequelize,
 		modelName: "user",

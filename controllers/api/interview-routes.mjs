@@ -2,12 +2,14 @@ import express from "express";
 import xss from "xss";
 import { User } from "../../models";
 import { Interview } from "../../models";
+import protect from "../../middlewares/auth.mjs";
 const router = express.Router();
 
 // GET /api/interviews
-router.get("/", async (req, res) => {
+router.get("/", protect, async (req, res) => {
 	try {
 		const interviews = await Interview.findAll({
+			where: { id: req.user.id },
 			include: { model: User, attributes: { exclude: ["password"] } },
 		});
 		res.json({ status: 200, error: false, data: interviews });
