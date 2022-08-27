@@ -8,6 +8,7 @@ const rounds = [
 		duration: 0.75,
 		completed: true,
 		interview_id: 2,
+		user_id: 1,
 	},
 	{
 		count: 2,
@@ -16,6 +17,7 @@ const rounds = [
 		duration: 1,
 		completed: false,
 		interview_id: 2,
+		user_id: 1,
 	},
 	{
 		count: 1,
@@ -24,6 +26,7 @@ const rounds = [
 		duration: 0.5,
 		completed: true,
 		interview_id: 1,
+		user_id: 2,
 	},
 ];
 

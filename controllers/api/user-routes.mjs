@@ -11,7 +11,11 @@ const generateToken = (id) => {
 
 // POST /api/user/signup
 router.post("/signup", async (req, res) => {
-	let { email, password } = req.body;
+	let { email = "", password = "" } = req.body;
+
+	// Sanitize fields
+	email = xss(email.trim());
+	password = xss(password.trim());
 
 	// Validate fields
 	if (!email || !password) {
@@ -22,11 +26,6 @@ router.post("/signup", async (req, res) => {
 			message: "Please provide email and/or password",
 		});
 	}
-
-	// Sanitize fields
-	email = xss(req.body.email);
-	password = xss(req.body.password);
-	const username = email.split("@")[0];
 
 	try {
 		// Check duplicate user
@@ -41,7 +40,11 @@ router.post("/signup", async (req, res) => {
 		}
 
 		// Create user account
-		const user = await User.create({ email, password, username });
+		const user = await User.create({
+			email,
+			password,
+			username: email.split("@")[0],
+		});
 		user.save();
 		res.status(201).json({
 			status: res.statusCode,
@@ -63,7 +66,11 @@ router.post("/signup", async (req, res) => {
 
 // POST /api/user/signin
 router.post("/signin", async (req, res) => {
-	let { email, password } = req.body;
+	let { email = "", password = "" } = req.body;
+
+	// Sanitize fields
+	email = xss(email.trim());
+	password = xss(password.trim());
 
 	// Validate fields
 	if (!email || !password) {
@@ -74,10 +81,6 @@ router.post("/signin", async (req, res) => {
 			message: "Please provide email and/or password",
 		});
 	}
-
-	// Sanitize fields
-	email = xss(req.body.email);
-	password = xss(req.body.password);
 
 	try {
 		// Compare user password
