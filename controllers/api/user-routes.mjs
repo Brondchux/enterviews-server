@@ -1,6 +1,7 @@
 import express from "express";
 import xss from "xss";
 import jwt from "jsonwebtoken";
+import protect from "../../middlewares/auth.mjs";
 import { User } from "../../models";
 const router = express.Router();
 const generateToken = (id) => {
@@ -46,9 +47,6 @@ router.post("/signup", async (req, res) => {
 			status: res.statusCode,
 			error: false,
 			data: {
-				id: user.id,
-				email: user.email,
-				username: user.username,
 				token: generateToken(user.id),
 			},
 			message: "Account successfully created.",
@@ -99,9 +97,6 @@ router.post("/signin", async (req, res) => {
 			status: res.statusCode,
 			error: false,
 			data: {
-				id: user.id,
-				email: user.email,
-				username: user.username,
 				token: generateToken(user.id),
 			},
 			message: "User successfully signed in.",
@@ -116,14 +111,26 @@ router.post("/signin", async (req, res) => {
 	}
 });
 
-// POST /api/user/me
-router.post("/me", async (req, res) => {
-	const id = xss(req.body.id);
+// GET /api/user/me
+router.get("/me", protect, async (req, res) => {
+	/**
+	 * The "protect" middleware already has our user data from db, using the "id" encrypted in jwt.
+	 * We can simply send back the req.user and not re-fetch it from database.
+	 */
 	try {
-		const user = await User.findByPk(id);
-		res.status(200).json({ status: res.statusCode, error: false, data: user });
+		res.status(200).json({
+			status: res.statusCode,
+			error: false,
+			data: await req.user,
+			message: "Found user data.",
+		});
 	} catch (err) {
-		res.status(400).json({ status: res.statusCode, error: err, data: null });
+		res.status(400).json({
+			status: res.statusCode,
+			error: err,
+			data: null,
+			message: "Invalid user data!",
+		});
 	}
 });
 
