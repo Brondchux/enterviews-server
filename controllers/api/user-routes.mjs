@@ -94,8 +94,6 @@ router.post("/signin", async (req, res) => {
 			});
 		}
 
-		// Brad - JWT Sign Verify https://www.youtube.com/watch?v=enopDSs3DRw
-		// Dave  - RTK Query https://www.youtube.com/watch?v=-JJFQ9bkUbo
 		res.status(200).json({
 			status: res.statusCode,
 			error: false,
