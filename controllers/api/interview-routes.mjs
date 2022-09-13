@@ -11,6 +11,8 @@ router.get("/", protect, async (req, res) => {
 	try {
 		const interviews = await Interview.findAll({
 			where: { user_id: req.user.id },
+			include: [{ model: Round }],
+			order: [[Round, "count", "DESC"]],
 		});
 		res.status(200).json({
 			status: res.statusCode,
@@ -34,7 +36,8 @@ router.get("/:id", protect, async (req, res) => {
 	try {
 		const interview = await Interview.findOne({
 			where: { id, user_id: req.user.id },
-			include: { model: Round },
+			include: [{ model: Round }],
+			order: [[Round, "count", "DESC"]],
 		});
 		res.status(200).json({
 			status: res.statusCode,
