@@ -12,7 +12,10 @@ router.get("/", protect, async (req, res) => {
 		const interviews = await Interview.findAll({
 			where: { user_id: req.user.id },
 			include: [{ model: Round }],
-			order: [[Round, "count", "DESC"]],
+			order: [
+				["id", "DESC"],
+				[Round, "count", "DESC"],
+			],
 		});
 		res.status(200).json({
 			status: res.statusCode,
