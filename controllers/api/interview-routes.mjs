@@ -130,9 +130,9 @@ router.post("/", protect, async (req, res) => {
 	}
 });
 
-// PUT /api/interviews/:id
-router.put("/:id", protect, async (req, res) => {
-	const id = xss(req.params.id);
+// PUT /api/interviews
+router.put("/", protect, async (req, res) => {
+	const id = xss(req.body.id);
 	try {
 		const interview = await Interview.update(
 			{ active: false },
@@ -141,7 +141,7 @@ router.put("/:id", protect, async (req, res) => {
 		res.status(200).json({
 			status: res.statusCode,
 			error: false,
-			data: interview,
+			data: interview[1],
 			message: "Updated user interview.",
 		});
 	} catch (err) {
