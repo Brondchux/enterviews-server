@@ -155,8 +155,8 @@ router.put("/", protect, async (req, res) => {
 });
 
 // DELETE /api/interviews/:id
-router.delete("/:id", protect, async (req, res) => {
-	const id = xss(req.params.id);
+router.delete("/", protect, async (req, res) => {
+	const id = xss(req.body.id);
 	try {
 		await Interview.destroy({ where: { id, user_id: req.user.id } });
 		res.status(200).json({
