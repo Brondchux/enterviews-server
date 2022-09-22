@@ -154,7 +154,7 @@ router.put("/", protect, async (req, res) => {
 	}
 });
 
-// DELETE /api/interviews/:id
+// DELETE /api/interviews
 router.delete("/", protect, async (req, res) => {
 	const id = xss(req.body.id);
 	try {
