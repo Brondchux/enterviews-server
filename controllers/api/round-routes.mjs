@@ -4,15 +4,15 @@ import protect from "../../middlewares/auth.mjs";
 import { Round } from "../../models";
 const router = express.Router();
 
-// PUT /api/rounds/:interviewId/:id
-router.put("/:interviewId/:id", protect, async (req, res) => {
-	const id = xss(req.params.id);
-	const interviewId = xss(req.params.interviewId);
+// PUT /api/rounds
+router.put("/", protect, async (req, res) => {
+	const roundId = xss(req.body.roundId);
+	const interviewId = xss(req.body.interviewId);
 	try {
 		const round = await Round.update(
 			{ completed: true },
 			{
-				where: { id, user_id: req.user.id, interview_id: interviewId },
+				where: { id: roundId, interview_id: interviewId, user_id: req.user.id },
 				returning: true,
 				plain: true,
 			}
@@ -20,7 +20,7 @@ router.put("/:interviewId/:id", protect, async (req, res) => {
 		res.status(200).json({
 			status: res.statusCode,
 			error: false,
-			data: round,
+			data: round[1] || {},
 			message: "Updated interview round.",
 		});
 	} catch (err) {
@@ -29,6 +29,30 @@ router.put("/:interviewId/:id", protect, async (req, res) => {
 			error: true,
 			data: null,
 			message: "Updating interview round failed!",
+		});
+	}
+});
+
+// DELETE /api/rounds
+router.delete("/", protect, async (req, res) => {
+	const roundId = xss(req.body.roundId);
+	const interviewId = xss(req.body.interviewId);
+	try {
+		await Round.destroy({
+			where: { id: roundId, interview_id: interviewId, user_id: req.user.id },
+		});
+		res.status(200).json({
+			status: res.statusCode,
+			error: false,
+			data: null,
+			message: "Deleted interview round.",
+		});
+	} catch (err) {
+		res.status(400).json({
+			status: res.statusCode,
+			error: true,
+			data: null,
+			message: "Deleting interview round failed!",
 		});
 	}
 });

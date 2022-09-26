@@ -141,7 +141,7 @@ router.put("/", protect, async (req, res) => {
 		res.status(200).json({
 			status: res.statusCode,
 			error: false,
-			data: interview[1],
+			data: interview[1] || {},
 			message: "Updated user interview.",
 		});
 	} catch (err) {
