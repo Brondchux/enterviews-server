@@ -11,11 +11,8 @@ router.get("/", protect, async (req, res) => {
 	try {
 		const interviews = await Interview.findAll({
 			where: { user_id: req.user.id },
-			include: [{ model: Round }],
-			order: [
-				["id", "DESC"],
-				[Round, "count", "DESC"],
-			],
+			include: [{ model: Round, limit: 1, order: [["count", "DESC"]] }],
+			order: [["id", "DESC"]],
 		});
 		res.status(200).json({
 			status: res.statusCode,
@@ -29,31 +26,6 @@ router.get("/", protect, async (req, res) => {
 			error: true,
 			data: null,
 			message: "Fetching user interviews failed!",
-		});
-	}
-});
-
-// GET /api/interviews/:id
-router.get("/:id", protect, async (req, res) => {
-	const id = xss(req.params.id);
-	try {
-		const interview = await Interview.findOne({
-			where: { id, user_id: req.user.id },
-			include: [{ model: Round }],
-			order: [[Round, "count", "DESC"]],
-		});
-		res.status(200).json({
-			status: res.statusCode,
-			error: false,
-			data: interview,
-			message: "Found user interview.",
-		});
-	} catch (err) {
-		res.status(400).json({
-			status: res.statusCode,
-			error: true,
-			data: null,
-			message: "Fetching user interview failed!",
 		});
 	}
 });

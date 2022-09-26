@@ -4,6 +4,30 @@ import protect from "../../middlewares/auth.mjs";
 import { Round } from "../../models";
 const router = express.Router();
 
+// GET /api/rounds/:interviewId
+router.get("/:interviewId", protect, async (req, res) => {
+	const interviewId = xss(req.params.interviewId);
+	try {
+		const rounds = await Round.findAll({
+			where: { interview_id: interviewId, user_id: req.user.id },
+			order: [["count", "DESC"]],
+		});
+		res.status(200).json({
+			status: res.statusCode,
+			error: false,
+			data: rounds,
+			message: "Found interview rounds.",
+		});
+	} catch (err) {
+		res.status(400).json({
+			status: res.statusCode,
+			error: true,
+			data: null,
+			message: "Fetching interview rounds failed!",
+		});
+	}
+});
+
 // PUT /api/rounds
 router.put("/", protect, async (req, res) => {
 	const roundId = xss(req.body.roundId);

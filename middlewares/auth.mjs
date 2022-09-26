@@ -33,7 +33,7 @@ const protect = async (req, res, next) => {
 			status: res.statusCode,
 			error: false,
 			data: null,
-			message: "Missing bearer token!",
+			message: "You are not authorized to initiate this transaction!",
 		});
 	}
 };
