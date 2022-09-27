@@ -66,14 +66,15 @@ router.post("/", protect, async (req, res) => {
 			interview.save();
 		}
 
-		// Calculate next round
-		const nextRound =
-			(await Round.count({
-				where: {
-					user_id: req.user.id,
-					interview_id: interview.id,
-				},
-			})) + 1;
+		// Calculate the next rounds count
+		const lastRound = await Round.findOne({
+			where: {
+				user_id: req.user.id,
+				interview_id: interview.id,
+			},
+			order: [["id", "DESC"]],
+		});
+		const nextRound = lastRound ? lastRound.count + 1 : 1;
 
 		// Add interview round
 		const round = await Round.create({
