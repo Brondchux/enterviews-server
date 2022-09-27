@@ -62,6 +62,21 @@ router.delete("/", protect, async (req, res) => {
 	const roundId = xss(req.body.roundId);
 	const interviewId = xss(req.body.interviewId);
 	try {
+		const roundsCount = await Round.count({
+			where: {
+				user_id: req.user.id,
+				interview_id: interviewId,
+			},
+		});
+		if (roundsCount === 1) {
+			return res.status(403).json({
+				status: res.statusCode,
+				error: true,
+				data: null,
+				message: "Last round of an interview cannot be deleted.",
+			});
+		}
+
 		await Round.destroy({
 			where: { id: roundId, interview_id: interviewId, user_id: req.user.id },
 		});
