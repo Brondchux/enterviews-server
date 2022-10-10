@@ -1,0 +1,6 @@
+{
+	"version": 1,
+	"name": "enterviews for interviews",
+	"builds": [{ "src": "app.mjs", "use": "@vercel/node" }],
+	"routes": [{ "src": "/(.*)", "dest": "/app.mjs" }]
+}
