@@ -13,10 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 // Routes setup
 app.use(routes);
 
-// Sequelize setup
-db.authenticate()
-	.then(() => console.log("DB connection has been established successfully."))
-	.catch((err) => console.error("Unable to connect to the database:", err));
+// // Sequelize setup
+// db.authenticate()
+// 	.then(() => console.log("DB connection has been established successfully."))
+// 	.catch((err) => console.error("Unable to connect to the database:", err));
 
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}`);
