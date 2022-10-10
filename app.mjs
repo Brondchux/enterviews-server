@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import routes from "./controllers";
+// import routes from "./controllers";
 import db from "./config/connection";
 
 const app = express();
@@ -10,8 +10,17 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes setup
-app.use(routes);
+// // Routes setup
+// app.use(routes);
+
+// Test URL
+app.get("/", (req, res) => {
+	res.status(200).json({
+		status: res.statusCode,
+		error: false,
+		data: { message: "Welcome to Enterviews RESTful APIs." },
+	});
+});
 
 // Sequelize setup
 db.authenticate()
