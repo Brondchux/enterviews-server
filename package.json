@@ -2,7 +2,7 @@
 	"name": "enterviews-server",
 	"version": "1.0.0",
 	"description": "",
-	"main": "server.js",
+	"main": "app.mjs",
 	"type": "module",
 	"scripts": {
 		"start": "node --es-module-specifier-resolution=node app.mjs",
