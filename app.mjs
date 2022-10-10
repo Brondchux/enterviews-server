@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import routes from "./controllers";
 import db from "./config/connection";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -12,6 +13,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes setup
 app.use(routes);
+
+// Allow CORS
+app.use(cors());
 
 // Sequelize setup
 db.authenticate()
