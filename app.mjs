@@ -15,11 +15,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
 // Allow CORS
-app.options("*", cors());
 app.use(
 	cors({
 		origin: "https://enterviews-client.vercel.app",
 		methods: ["GET", "POST", "PUT", "DELETE"],
+		credentials: true,
 	})
 );
 
