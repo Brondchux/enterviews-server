@@ -18,6 +18,7 @@ const seedAll = async () => {
 
 try {
 	await seedAll();
+	console.log("Seeded DB successfully!");
 } catch (e) {
-	throw new Error(`An error occured! ${e}`);
+	throw new Error(`This error occured while seeding DB: ${e}`);
 }
