@@ -15,8 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
 // Allow CORS
-app.options("*", cors());
-app.use(cors({ origin: "*" }));
+// app.options("*", cors());
+app.use(cors({ origin: "https://enterviews-client.vercel.app" }));
 
 // Sequelize setup
 db.authenticate()
