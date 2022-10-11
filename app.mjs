@@ -7,13 +7,6 @@ import cors from "cors";
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// URL-encoded & JSON bodies setup
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Routes setup
-app.use(routes);
-
 // Allow CORS
 app.use(
 	cors({
@@ -22,6 +15,13 @@ app.use(
 		credentials: true,
 	})
 );
+
+// URL-encoded & JSON bodies setup
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Routes setup
+app.use(routes);
 
 // Sequelize setup
 db.authenticate()
