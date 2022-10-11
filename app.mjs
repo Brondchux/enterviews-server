@@ -15,7 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
 // Allow CORS
-app.use(cors());
+app.options("*", cors());
+app.use(cors({ origin: "*" }));
 
 // Sequelize setup
 db.authenticate()
