@@ -7,12 +7,12 @@ import cors from "cors";
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Allow CORS
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
-
 // URL-encoded & JSON bodies setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Allow CORS
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 
 // Routes setup
 app.use(routes);
