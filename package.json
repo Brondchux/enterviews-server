@@ -11,7 +11,8 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
-	"author": "Gospel Chukwu [Git @brondchux]",
+	"author": "Gospel Chukwu",
+	"author-github": "@brondchux",
 	"license": "ISC",
 	"dependencies": {
 		"bcrypt": "^5.0.1",
