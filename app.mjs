@@ -14,6 +14,15 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// tester
+app.get("/", (req, res) => {
+	res.status(200).json({
+		status: res.statusCode,
+		error: false,
+		data: { message: "Welcome to Enterviews RESTful APIs." },
+	});
+});
+
 // // Routes setup
 // app.use(routes);
 
