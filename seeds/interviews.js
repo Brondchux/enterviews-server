@@ -1,4 +1,4 @@
-import { Interview } from "../models";
+const { Interview } = require("../models");
 
 const interviews = [
 	{
@@ -15,4 +15,4 @@ const interviews = [
 
 const interviewData = () => Interview.bulkCreate(interviews);
 
-export default interviewData;
+module.exports = interviewData;

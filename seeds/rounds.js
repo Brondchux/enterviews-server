@@ -1,4 +1,4 @@
-import { Round } from "../models";
+const { Round } = require("../models");
 
 const rounds = [
 	{
@@ -32,4 +32,4 @@ const rounds = [
 
 const roundData = () => Round.bulkCreate(rounds);
 
-export default roundData;
+module.exports = roundData;

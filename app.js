@@ -1,8 +1,8 @@
-import "dotenv/config";
-import express from "express";
-import routes from "./controllers";
-import db from "./config/connection";
-import cors from "cors";
+require("dotenv/config");
+const express = require("express");
+const routes = require("./controllers");
+const db = require("./config/connection");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 3001;

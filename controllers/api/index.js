@@ -1,11 +1,11 @@
-import express from "express";
-import userRoutes from "./user-routes";
-import roundRoutes from "./round-routes";
-import interviewRoutes from "./interview-routes";
+const express = require("express");
+const userRoutes = require("./user-routes");
+const roundRoutes = require("./round-routes");
+const interviewRoutes = require("./interview-routes");
 const router = express.Router();
 
 router.use("/user", userRoutes);
 router.use("/rounds", roundRoutes);
 router.use("/interviews", interviewRoutes);
 
-export default router;
+module.exports = router;

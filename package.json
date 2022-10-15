@@ -3,11 +3,10 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "app.js",
-	"type": "module",
 	"scripts": {
-		"start": "node --es-module-specifier-resolution=node app.js",
-		"seed": "node --es-module-specifier-resolution=node seeds/index.js",
-		"dev": "nodemon --es-module-specifier-resolution=node app.js",
+		"start": "node app.js",
+		"seed": "node seeds/index.js",
+		"dev": "nodemon app.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],

@@ -1,11 +1,11 @@
-import "dotenv/config";
-import db from "../config/connection";
-import userData from "./users";
-import roundData from "./rounds";
-import interviewData from "./interviews";
+require("dotenv/config");
+const db = require("../config/connection");
+const userData = require("./users");
+const roundData = require("./rounds");
+const interviewData = require("./interviews");
 
 const seedAll = async () => {
-	await db.sync({ force: true });
+	await db.sync({ force: false });
 
 	await userData();
 

@@ -1,9 +1,9 @@
-import express from "express";
-import xss from "xss";
-import { Round } from "../../models";
-import { Interview } from "../../models";
-import { setStartTime, setEndTime } from "../../utils/mixins.js";
-import protect from "../../middlewares/auth.js";
+const express = require("express");
+const xss = require("xss");
+const { Round } = require("../../models");
+const { Interview } = require("../../models");
+const { setStartTime, setEndTime } = require("../../utils/mixins.js");
+const protect = require("../../middlewares/auth.js");
 const router = express.Router();
 
 // GET /api/interviews
@@ -148,4 +148,4 @@ router.delete("/", protect, async (req, res) => {
 	}
 });
 
-export default router;
+module.exports = router;

@@ -1,8 +1,8 @@
-import express from "express";
-import xss from "xss";
-import jwt from "jsonwebtoken";
-import protect from "../../middlewares/auth.js";
-import { User } from "../../models";
+const express = require("express");
+const xss = require("xss");
+const jwt = require("jsonwebtoken");
+const protect = require("../../middlewares/auth.js");
+const { User } = require("../../models");
 const router = express.Router();
 const generateToken = (id) => {
 	if (!id) return;
@@ -135,4 +135,4 @@ router.get("/me", protect, async (req, res) => {
 	}
 });
 
-export default router;
+module.exports = router;

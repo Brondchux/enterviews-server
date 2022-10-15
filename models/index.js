@@ -1,6 +1,6 @@
-import User from "./User";
-import Round from "./Round";
-import Interview from "./Interview";
+const User = require("./User");
+const Round = require("./Round");
+const Interview = require("./Interview");
 
 // Define models relationships or association
 
@@ -10,4 +10,4 @@ Interview.belongsTo(User, { foreignKey: "user_id" });
 Interview.hasMany(Round, { foreignKey: "interview_id" });
 Round.belongsTo(Interview, { foreignKey: "interview_id", onDelete: "CASCADE" });
 
-export { User, Round, Interview };
+module.exports = { User, Round, Interview };

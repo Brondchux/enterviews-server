@@ -1,4 +1,4 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
 
 // GET "/"
@@ -10,4 +10,4 @@ router.get("/", (req, res) => {
 	});
 });
 
-export default router;
+module.exports = router;

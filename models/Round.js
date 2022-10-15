@@ -1,5 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import sequelize from "../config/connection";
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 class Round extends Model {}
 
@@ -50,4 +50,4 @@ Round.init(
 	}
 );
 
-export default Round;
+module.exports = Round;

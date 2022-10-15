@@ -1,7 +1,7 @@
-import express from "express";
-import xss from "xss";
-import protect from "../../middlewares/auth.js";
-import { Round } from "../../models";
+const express = require("express");
+const xss = require("xss");
+const protect = require("../../middlewares/auth.js");
+const { Round } = require("../../models");
 const router = express.Router();
 
 // GET /api/rounds/:interviewId
@@ -96,4 +96,4 @@ router.delete("/", protect, async (req, res) => {
 	}
 });
 
-export default router;
+module.exports = router;
