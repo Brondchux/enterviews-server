@@ -1,6 +1,6 @@
 import express from "express";
 import xss from "xss";
-import protect from "../../middlewares/auth.mjs";
+import protect from "../../middlewares/auth.js";
 import { Round } from "../../models";
 const router = express.Router();
 

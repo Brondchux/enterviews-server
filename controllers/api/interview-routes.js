@@ -2,8 +2,8 @@ import express from "express";
 import xss from "xss";
 import { Round } from "../../models";
 import { Interview } from "../../models";
-import { setStartTime, setEndTime } from "../../utils/mixins.mjs";
-import protect from "../../middlewares/auth.mjs";
+import { setStartTime, setEndTime } from "../../utils/mixins.js";
+import protect from "../../middlewares/auth.js";
 const router = express.Router();
 
 // GET /api/interviews

@@ -1,7 +1,7 @@
 import express from "express";
 import xss from "xss";
 import jwt from "jsonwebtoken";
-import protect from "../../middlewares/auth.mjs";
+import protect from "../../middlewares/auth.js";
 import { User } from "../../models";
 const router = express.Router();
 const generateToken = (id) => {
