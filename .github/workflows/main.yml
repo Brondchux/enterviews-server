@@ -26,4 +26,3 @@ jobs:
           server: api.enterviews.gospelchukwu.com
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
-          server-dir: /api.enterviews.gospelchukwu.com/
