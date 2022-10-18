@@ -5,7 +5,7 @@ const roundData = require("./rounds");
 const interviewData = require("./interviews");
 
 const seedAll = async () => {
-	await db.sync({ force: true });
+	await db.sync({ force: false });
 
 	await userData();
 
