@@ -6,7 +6,8 @@ router.get("/", (req, res) => {
 	res.status(200).json({
 		status: res.statusCode,
 		error: false,
-		data: { message: "Welcome to Enterviews RESTful APIs." },
+		data: null,
+		message: "Welcome to Enterviews RESTful APIs.",
 	});
 });
 
